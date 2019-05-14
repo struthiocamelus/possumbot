@@ -1,0 +1,9 @@
+language: rust
+dist: xenial
+cache: cargo
+addons:
+  apt:
+    packages:
+      - pkg-config
+      - libssl-dev
+rust: nightly
