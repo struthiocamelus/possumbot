@@ -1,0 +1,9 @@
+[package]
+name = "possumbot"
+version = "0.1.0"
+authors = ["Sistercities <sistercities@disroot.org>"]
+edition = "2018"
+
+[dependencies]
+serenity = "0.5.13"
+config = "0.9.3"
