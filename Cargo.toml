@@ -6,4 +6,6 @@ edition = "2018"
 
 [dependencies]
 serenity = "0.5.13"
-config = "0.9.3"
+giphy = "0.3.0"
+reqwest = "0.9.16"
+dotenv = "0.14.1"
