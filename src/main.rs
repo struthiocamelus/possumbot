@@ -2,6 +2,7 @@ extern crate serenity;
 extern crate giphy;
 extern crate reqwest;
 extern crate dotenv;
+extern crate rand;
 
 use serenity::{
     model::{channel::Message, gateway::Ready},
@@ -11,6 +12,7 @@ use giphy::v1::sync::*;
 use giphy::v1::gifs::RandomRequest;
 use dotenv::dotenv;
 use std::env;
+use rand::Rng;
 
 struct Handler;
 
@@ -27,12 +29,31 @@ impl EventHandler for Handler {
 			if let Err(why) = msg.reply(&response.data.embed_url) {
 				println!("Error sending message: {:?}", why);
 			}
+		} else if msg.content == "!ping" {
+			if let Err(why) = msg.reply("Pong!") {
+				println!("Error sending message: {:?}", why);
+			}
+		} else if msg.content.contains("!8ball") {
+			if let Err(why) = msg.reply(&eightball()) {
+				println!("Error sending message: {:?}", why);
+			}
 		}
 	}
 
 	fn ready(&self, _: Context, ready: Ready) {
         println!("{} is connected!", ready.user.name);
 	}
+}
+
+fn eightball() -> String {
+	let choices = ["It is certain.", "It is decidedly so.", "Without a doubt.", "Yes - Definitely",
+				   "You may rely on it.", "As I see it, yes.", "Most likely.", "Outlook is good.",
+				   "Yes.", "Signs point to yes.", "Reply hazy, try again.", "Ask again later.",
+				   "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again", "Don't count on it.",
+				   "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful.", "No"];
+	let mut rng = rand::thread_rng();
+
+	return rng.choose(&choices).unwrap().to_string();
 }
 
 fn main() {
