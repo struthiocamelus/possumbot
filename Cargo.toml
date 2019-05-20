@@ -9,3 +9,6 @@ serenity = "0.5.13"
 giphy = "0.3.0"
 reqwest = "0.9.16"
 dotenv = "0.14.1"
+
+[patch.crates-io]
+openssl = { git = "https://github.com/ishitatsuyuki/rust-openssl", branch = "0.9.x" }
